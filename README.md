@@ -1,11 +1,11 @@
 #Cucumber - BDD framework
 
 ##Introduction:
-This framework helps us to execute the tests with BDD in parallel/sequential executions.It also generates serenity report.
+This framework helps us to execute the tests with BDD in sequential executions.It also generates serenity report.
 
 ##Pre-Requisites:
 - Maven 
-- Intellij version:2019.3
+- Intellij version:2020.3
 - Selenium version:3.5.3
 - Cucumber version:1.2.5
 - Serenity version:1.5.11
@@ -30,16 +30,13 @@ These framework contains following packages:
 We can execute test cases in three different ways as follows:
 #####Use maven
 open maven command window and execute test cases to generate serenity report in both parallel/sequential executions
-> clean verify -DRunner=<parallel_name>/<CukesRunner_name>
+> clean verify -DRunner=<CukesRunner_name>
 
 #####Run a subset of Features or Scenarios
 We can execute specific scenario/feature file by right click and run.
 
-#####Running only the scenarios that failed in the previous run
-These works as long as we have rerun enabled.
-> clean verify -DRunner=<RetryRunner_name>
  
 ##Framework benefits:
-- These framework helps us to run the test cases in parallel/sequential.
+- These framework helps us to run the test cases in sequential.
 - We can generate serenity report.
-- We can also execute rerun.
+- This is easy to read and can be understood by all stakeholders including technical and non-technical person.
