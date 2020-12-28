@@ -1,5 +1,5 @@
 @Amazon
-Feature: Pincode change and prime benefits and cart verification
+Feature: Add Pincode and product
 
 
   @PinCode

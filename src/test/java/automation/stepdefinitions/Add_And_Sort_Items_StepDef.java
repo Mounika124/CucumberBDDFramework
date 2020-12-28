@@ -1,6 +1,7 @@
 package automation.stepdefinitions;
 
 
+import automation.pageactions.CommonPageActions;
 import automation.pageactions.HomePageActions;
 import automation.pageactions.ProductPageActions;
 import automation.pageobjects.HomePage;
@@ -9,6 +10,7 @@ import automation.utilities.Constants;
 import automation.utilities.Pojo;
 import automation.utilities.Utils;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.log4j.Logger;
@@ -18,19 +20,21 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import static automation.utilities.Asserts.expectToBeTrue;
 
-public class AddItemsAndSortItemsStepDef {
+public class Add_And_Sort_Items_StepDef {
     HomePageActions homePageActions = new HomePageActions();
     Pojo pojo = Pojo.getInstance();
     HomePage homePage = new HomePage();
     ProductPageActions productPageActions = new ProductPageActions();
     Logger logger = Logger.getLogger("AddItemsAndSortItemsStepDef");
+    CommonPageActions commonPageActions=new CommonPageActions();
     Utils utils;
     private WebDriver webDriver;
 
-    public AddItemsAndSortItemsStepDef() {
+    public Add_And_Sort_Items_StepDef() {
         utils = Utils.getInstance();
         webDriver = utils.getDriver();
     }
@@ -81,10 +85,19 @@ public class AddItemsAndSortItemsStepDef {
     }
 
     /**
-     * Verify the delivery options are available for the product in product page
+     * Add the item to the wish list
      */
-    @And("^Options available for the product$")
-    public void optionsAvailableForTheProduct() {
+    @And("^Add the product to wish list$")
+    public void addTheProductToWishList() {
+        productPageActions.selectWishList();
+    }
 
+    @Given("^Login in to the application$")
+    public void loginInToTheApplication(List<Map<String, String>> userCredentials) {
+        commonPageActions.user_login(userCredentials.get(0).get("UserName"),userCredentials.get(0).get("Password"));
+    }
+
+    @Then("^Verify The WishList$")
+    public void verifyTheWishList() {
     }
 }

@@ -44,5 +44,11 @@ public class ProductPageActions extends CommonPageActions {
         utils.isElementPresent(productPage.addToWishList, "add to cart element", Constants.MEDIUMWAIT);
         Asserts.expectToBeTrue(productPage.addToWishList.isDisplayed(), "Add to wish list displayed");
     }
+    public void selectWishList(){
+        utils.setFinalHighlight(productPage.addToWishList);
+        utils.safeClick(productPage.addToWishList, "addToWishList", Constants.MEDIUMWAIT);
+
+    }
+
 
 }

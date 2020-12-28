@@ -8,11 +8,14 @@ Feature: Add items to wish list and sort items
   Scenario Outline: Add an item to wish list
     When User search for an item with "<productName>"
     Then Verify the product name
-    And Options available for the product
+    And Add the product to wish list
+    Given Login in to the application
+      | UserName   | Password     |
+      | 8500336470 | MOUNIKAMINTU |
+    Then Verify The WishList
     Examples:
       | productName |
       | Samsung     |
-      | OnePlus     |
 
   @SortItems
   Scenario Outline: Sort items by applying filters

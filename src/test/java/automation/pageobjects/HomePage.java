@@ -2,13 +2,14 @@ package automation.pageobjects;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
 import java.util.List;
 
 public class HomePage extends MasterPage {
 
 
-    public HomePage(){
-       super();
+    public HomePage() {
+        super();
     }
 
     @FindBy(className = "nav-logo-link")
@@ -38,14 +39,42 @@ public class HomePage extends MasterPage {
     @FindBy(id = "glow-ingress-line2")
     public WebElement pinCodeValue;
 
-    @FindBy(css = "[id=glow-ingress-line2][class='nav-line-2']")
-    public WebElement pinValue;
+
+    public String settings = "//input[@value='";
+
+    public String language = "_IN']//following-sibling::i";
+
+    @FindBy(className = "a-button-input")
+    public WebElement save;
+
+    @FindBy(css = "input[name='LOP']")
+    public WebElement languageRadioButtons;
+
+    @FindBy(css = "span[id='icp-sl-t-title']")
+    public WebElement englishTranslationText;
+    @FindBy(id = "icp-nav-flyout")
+    public WebElement languageSettings;
+
+    @FindBy(id = "lop-heading")
+    public WebElement languageSettingsText;
 
     @FindBy(id = "GLUXZipUpdateInput")
     public WebElement pinCodeTextBox;
 
     @FindBy(id = "GLUXZipUpdate-announce")
     public WebElement applyButton;
+
+    @FindBy(css = "[id='ap_email']")
+    public WebElement loginEmail;
+
+    @FindBy(css = "[id='continue']")
+    public WebElement continueButton;
+
+    @FindBy(css = "[id='ap_password']")
+    public WebElement loginPassword;
+
+    @FindBy(id = "signInSubmit")
+    public WebElement signIn;
 
 
 }

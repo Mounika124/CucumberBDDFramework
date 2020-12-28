@@ -2,10 +2,11 @@ package automation.pageactions;
 
 
 import automation.pageobjects.HomePage;
+import automation.utilities.Asserts;
 import automation.utilities.Constants;
 import automation.utilities.Pojo;
 import org.apache.log4j.Logger;
-import org.jruby.RubyProcess;
+import org.openqa.selenium.By;
 
 import java.util.List;
 
@@ -60,6 +61,36 @@ public class HomePageActions extends CommonPageActions {
 
     public void verifyPincode() {
         utils.elementWait(homePage.pinCodeValue, Constants.LONGWAIT);
-        expectToBeTrue(pojo.getPinCode().contains(utils.safeGetText(homePage.pinCodeTextBox,"Pin code text box",Constants.MEDIUMWAIT)), "PinCode text is not verified");
+        expectToBeTrue(pojo.getPinCode().contains(utils.safeGetText(homePage.pinCodeTextBox, "Pin code text box", Constants.MEDIUMWAIT)), "PinCode text is not verified");
+    }
+
+    public void languageSettings() {
+        utils.safeJavaScriptClick(homePage.languageRadioButtons, "Language radio button", Constants.MEDIUMWAIT);
+        utils.elementWait(homePage.englishTranslationText, Constants.MEDIUMWAIT);
+        pojo.setEnglishTranslationText(utils.safeGetText(homePage.englishTranslationText, "English Translation Text", Constants.MEDIUMWAIT));
+        expectToBeTrue(pojo.getEnglishTranslationText().equalsIgnoreCase("Translation"), "Language Translation Text is not Verified");
+        utils.isAttributePresent(homePage.languageRadioButtons, "checked");
+    }
+
+    public String selectLanguage(String lang) {
+        String[] language = lang.split("");
+        String result = language[0] + language[1];
+        System.out.println(language[0] + language[1]);
+        utils.safeClick(webDriver.findElement(By.xpath(homePage.settings + language[0] + language[1] + homePage.language)), "",Constants.MEDIUMWAIT);
+        utils.safeClick(homePage.save, "Save Changes", Constants.MEDIUMWAIT);
+        return result;
+    }
+
+    public void verifyLanguageChange(String result) {
+        String url = webDriver.getCurrentUrl();
+        System.out.println(url);
+        Asserts.expectToBeTrue(url.contains(result),"" );
+    }
+
+    public void navigateToLanguageSettings() {
+        utils.safeClick(homePage.languageSettings, "Clicked On Language Settings", Constants.MEDIUMWAIT);
+        utils.elementWait(homePage.languageSettingsText, Constants.MEDIUMWAIT);
+        pojo.setLanguageSettings(utils.safeGetText(homePage.languageSettingsText, "Language Settings", Constants.MEDIUMWAIT));
+        expectToBeTrue(pojo.getLanguageSettings().equals("Language Settings"), "Language Settings text is not Displayed");
     }
 }

@@ -16,6 +16,7 @@ Feature: Search product in amazon and language change option
   @LanguageChanging
   Scenario: Language Settings in amazon
     When User navigate to language settings
+    And Select "telugu" Language
     Then Verify the items in language settings
 
 

@@ -3,10 +3,11 @@ package automation.stepdefinitions;
 import automation.pageactions.HomePageActions;
 import automation.pageactions.ProductPageActions;
 import automation.pageobjects.HomePage;
-import automation.pageobjects.LanguageChangingPage;
 import automation.utilities.Constants;
 import automation.utilities.Pojo;
 import automation.utilities.Utils;
+import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -16,17 +17,17 @@ import org.openqa.selenium.WebDriver;
 import static automation.utilities.Asserts.expectToBeTrue;
 
 
-public class SearchItemAndLanguageChangingStepDef {
-    HomePageActions homePageActions =new  HomePageActions();
+public class Search_Products_And_Language_Setting_StepDef {
+    HomePageActions homePageActions = new HomePageActions();
     Logger logger = Logger.getLogger("SearchItemAndLanguageChangingStepDef");
     Pojo pojo = Pojo.getInstance();
     ProductPageActions productPageActions = new ProductPageActions();
     HomePage homePage = new HomePage();
-    LanguageChangingPage languageChangingPage = new LanguageChangingPage();
     Utils utils;
+    String result;
     WebDriver webDriver;
 
-    public SearchItemAndLanguageChangingStepDef() {
+    public Search_Products_And_Language_Setting_StepDef() {
         utils = Utils.getInstance();
         webDriver = utils.getDriver();
     }
@@ -59,7 +60,7 @@ public class SearchItemAndLanguageChangingStepDef {
     public void verifyTheItemsDisplayed() {
         logger.info("************Verify the items*********************");
         productPageActions.verifyOptions();
-      }
+    }
 
     /**
      * User Navigate to language settings page
@@ -67,10 +68,13 @@ public class SearchItemAndLanguageChangingStepDef {
     @When("^User navigate to language settings$")
     public void userNavigateToLanguageSettings() {
         logger.info("*******************Language Settings**********************");
-        utils.safeClick(languageChangingPage.languageSettings, "Clicked On Language Settings", Constants.MEDIUMWAIT);
-        utils.elementWait(languageChangingPage.languageSettingsText, Constants.MEDIUMWAIT);
-        pojo.setLanguageSettings(utils.safeGetText(languageChangingPage.languageSettingsText, "Language Settings", Constants.MEDIUMWAIT));
-        expectToBeTrue(pojo.getLanguageSettings().equals("Language Settings"), "Language Settings text is not Displayed");
+        homePageActions.navigateToLanguageSettings();
+    }
+
+    @And("^Select \"([^\"]*)\" Language$")
+    public void selectLanguage(String arg0)  {
+        homePageActions.languageSettings();
+        result= homePageActions.selectLanguage(arg0);
     }
 
     /**
@@ -79,10 +83,7 @@ public class SearchItemAndLanguageChangingStepDef {
     @Then("^Verify the items in language settings$")
     public void verifyTheItemsInLanguageSettings() {
         logger.info("*************Verify language radio button and language translation********************");
-        utils.safeJavaScriptClick(languageChangingPage.languageRadioButtons, "Language radio button", Constants.MEDIUMWAIT);
-        utils.elementWait(languageChangingPage.englishTranslationText, Constants.MEDIUMWAIT);
-        pojo.setEnglishTranslationText(utils.safeGetText(languageChangingPage.englishTranslationText, "English Translation Text", Constants.MEDIUMWAIT));
-        expectToBeTrue(pojo.getEnglishTranslationText().equalsIgnoreCase("Translation"), "Language Translation Text is not Verified");
-        utils.isAttributePresent(languageChangingPage.languageRadioButtons, "checked");
+        homePageActions.verifyLanguageChange(result);
     }
+
 }

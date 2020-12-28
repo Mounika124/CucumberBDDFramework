@@ -2,6 +2,7 @@ package automation.pageobjects;
 
 import automation.utilities.Utils;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class MasterPage {
@@ -14,6 +15,7 @@ public class MasterPage {
         webDriver = utils.getDriver();
         PageFactory.initElements(webDriver, this);
     }
+
 }
 
 
