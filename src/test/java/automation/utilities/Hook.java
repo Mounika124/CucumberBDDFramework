@@ -107,7 +107,7 @@ public class Hook {
         gettersSetters.setEnvironmeent(environment);
     }
 
-    @After
+//    @After
     public void destoryDriver(Scenario scenario) {
         try {
             if (scenario.isFailed()) {

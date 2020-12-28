@@ -1,6 +1,7 @@
 package automation.stepdefinitions;
 
 import automation.pageactions.HomePageActions;
+import automation.pageactions.ProductPageActions;
 import automation.pageobjects.HomePage;
 import automation.pageobjects.LanguageChangingPage;
 import automation.utilities.Constants;
@@ -19,6 +20,7 @@ public class SearchItemAndLanguageChangingStepDef {
     HomePageActions homePageActions =new  HomePageActions();
     Logger logger = Logger.getLogger("SearchItemAndLanguageChangingStepDef");
     Pojo pojo = Pojo.getInstance();
+    ProductPageActions productPageActions = new ProductPageActions();
     HomePage homePage = new HomePage();
     LanguageChangingPage languageChangingPage = new LanguageChangingPage();
     Utils utils;
@@ -56,10 +58,8 @@ public class SearchItemAndLanguageChangingStepDef {
     @Then("^Verify the items displayed$")
     public void verifyTheItemsDisplayed() {
         logger.info("************Verify the items*********************");
-        utils.elementWait(homePage.searchItemDisplayedText, Constants.MEDIUMWAIT);
-        pojo.setSearchItemText(utils.safeGetText(homePage.searchItemDisplayedText, "Search Item Displayed text", Constants.MEDIUMWAIT));
-        expectToBeTrue(pojo.getSearchItemText().contains(pojo.getValue()), "Search Item text is not displayed");
-    }
+        productPageActions.verifyOptions();
+      }
 
     /**
      * User Navigate to language settings page

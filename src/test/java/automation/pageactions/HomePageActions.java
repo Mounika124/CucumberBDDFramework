@@ -3,14 +3,18 @@ package automation.pageactions;
 
 import automation.pageobjects.HomePage;
 import automation.utilities.Constants;
-import groovy.lang.Singleton;
+import automation.utilities.Pojo;
 import org.apache.log4j.Logger;
+import org.jruby.RubyProcess;
+
 import java.util.List;
+
+import static automation.utilities.Asserts.expectToBeTrue;
 
 
 public class HomePageActions extends CommonPageActions {
-
-    HomePage homePage =new HomePage();
+    Pojo pojo = Pojo.getInstance();
+    HomePage homePage = new HomePage();
     static Logger logger = Logger.getLogger("HomePageActions");
 
     public HomePageActions() {
@@ -19,6 +23,7 @@ public class HomePageActions extends CommonPageActions {
 
     /**
      * search for an item in home page
+     *
      * @param item
      * @return the search item
      */
@@ -32,6 +37,7 @@ public class HomePageActions extends CommonPageActions {
 
     /**
      * Method to sort thr elements in ascending order
+     *
      * @param list
      * @param <T>
      * @return boolean value (true/false)
@@ -46,5 +52,14 @@ public class HomePageActions extends CommonPageActions {
         return true;
     }
 
+    public void enterPincode(String pinCode) {
+        utils.safeClick(homePage.pinCodeValue, "Select Your Address is clicked", Constants.MEDIUMWAIT);
+        utils.safeClearAndType(homePage.pinCodeTextBox, pinCode, "Text Entered", Constants.MEDIUMWAIT);
+        utils.safeJavaScriptClick(homePage.applyButton, "Clicked On Apply Button", Constants.MEDIUMWAIT);
+    }
 
+    public void verifyPincode() {
+        utils.elementWait(homePage.pinCodeValue, Constants.LONGWAIT);
+        expectToBeTrue(pojo.getPinCode().contains(utils.safeGetText(homePage.pinCodeTextBox,"Pin code text box",Constants.MEDIUMWAIT)), "PinCode text is not verified");
+    }
 }

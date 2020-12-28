@@ -1,14 +1,15 @@
 @Amazon
 Feature: Pincode change and prime benefits and cart verification
 
-  Background: User is on amazon home page
-    Given User is on home page
 
   @PinCode
-  Scenario Outline: Add PinCode To The Address
-    When User add "<pinCode>" for the address
-    Then Verify the pincode is added or not
-    Examples:
+  Scenario: Add PinCode To The Address
+    Given User is on home page
+    When User select location by entering pincode
       | pinCode |
       | 500081  |
-      | 500041  |
+    Then Verify the pincode is added or not
+    And Search The Product
+      | productName |
+      | Samsung     |
+    Then Verify Options in Product Page

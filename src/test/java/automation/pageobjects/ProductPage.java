@@ -13,14 +13,17 @@ public class ProductPage extends MasterPage {
     @FindBy(css = "span[id='productTitle']")
     public WebElement productTitle;
 
-    @FindBy(id = "[id='add-to-cart-button']")
+    @FindBy(css = "[id='add-to-cart-button']")
     public WebElement addToCart;
 
-    @FindBy(id = "[id='buy-now-button']")
+    @FindBy(css = "[id='buy-now-button']")
     public WebElement buyNow;
 
     @FindBy(css = "a[title='Add to Wish List']")
     public WebElement addToWishList;
+
+    @FindBy(css = "[class='a-size-medium a-color-base a-text-normal']")
+    public WebElement productSelect;
 
 
 

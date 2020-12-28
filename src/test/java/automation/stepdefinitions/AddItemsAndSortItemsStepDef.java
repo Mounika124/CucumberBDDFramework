@@ -2,6 +2,7 @@ package automation.stepdefinitions;
 
 
 import automation.pageactions.HomePageActions;
+import automation.pageactions.ProductPageActions;
 import automation.pageobjects.HomePage;
 import automation.pageobjects.ProductPage;
 import automation.utilities.Constants;
@@ -24,7 +25,7 @@ public class AddItemsAndSortItemsStepDef {
     HomePageActions homePageActions = new HomePageActions();
     Pojo pojo = Pojo.getInstance();
     HomePage homePage = new HomePage();
-    ProductPage productPage = new ProductPage();
+    ProductPageActions productPageActions = new ProductPageActions();
     Logger logger = Logger.getLogger("AddItemsAndSortItemsStepDef");
     Utils utils;
     private WebDriver webDriver;
@@ -76,15 +77,7 @@ public class AddItemsAndSortItemsStepDef {
     @Then("^Verify the product name$")
     public void verifyTheProductName() {
         logger.info("********************Verify product name*********************");
-        utils.elementWait(homePage.selectedItemText, Constants.MEDIUMWAIT);
-        pojo.setProductName(utils.safeGetText(homePage.selectedItemText, "Selected Item Text", Constants.MEDIUMWAIT));
-        logger.info(pojo.getProductName());
-        utils.safeClick(homePage.selectedItem, "Clicked On Selected Item", Constants.MEDIUMWAIT);
-        utils.switchToChildWindow();
-        utils.elementWait(productPage.productTitle, Constants.MEDIUMWAIT);
-        pojo.setItemName(utils.safeGetText(productPage.productTitle, "product title", Constants.MEDIUMWAIT));
-        logger.info(pojo.getItemName());
-        expectToBeTrue(pojo.getProductName().equals(pojo.getItemName()), "Product name and item name are not equal");
+        productPageActions.verifyProduct();
     }
 
     /**

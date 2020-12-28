@@ -35,7 +35,17 @@ public class HomePage extends MasterPage {
     @FindBy(xpath = "(//*[@class='a-price-whole'])")
     public List<WebElement> priceList;
 
+    @FindBy(id = "glow-ingress-line2")
+    public WebElement pinCodeValue;
 
+    @FindBy(css = "[id=glow-ingress-line2][class='nav-line-2']")
+    public WebElement pinValue;
+
+    @FindBy(id = "GLUXZipUpdateInput")
+    public WebElement pinCodeTextBox;
+
+    @FindBy(id = "GLUXZipUpdate-announce")
+    public WebElement applyButton;
 
 
 }
